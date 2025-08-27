@@ -2,47 +2,91 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Formulario Cliente</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario Cliente Alfin</title>
+<!-- Google Fonts para estilo profesional -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f6f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        max-width: 500px;
+        width: 90%;
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto 20px auto;
+        max-width: 150px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #1d2b5c;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1d2b5c;
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #374785;
+    }
+
+    @media(max-width: 500px){
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 20px;
+        }
+
+        button {
+            font-size: 16px;
+        }
+    }
+</style>
 </head>
 <body>
-<h1>Formulario Cliente</h1>
-<form id="formulario">
-    <label>Nombre:</label>
-    <input type="text" id="nombre"><br><br>
-    <label>Correo:</label>
-    <input type="email" id="correo"><br><br>
-    <label>RUC:</label>
-    <input type="text" id="ruc"><br><br>
-    <button type="button" onclick="generarPDF()">Generar Documentos</button>
-</form>
-
-<script>
-function generarPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    const nombre = document.getElementById('nombre').value;
-    const correo = document.getElementById('correo').value;
-    const ruc = document.getElementById('ruc').value;
-
-    doc.text(`Documento 1\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
-    doc.save('Documento1.pdf');
-
-    doc.text(`Documento 2\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
-    doc.save('Documento2.pdf');
-
-    doc.text(`Documento 3\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
-    doc.save('Documento3.pdf');
-    
-    doc.text(`Documento 4\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
-    doc.save('Documento4.pdf');
-
-    doc.text(`Documento 5\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
-    doc.save('Documento5.pdf');
-}
-</script>
-</body>
-</html>
-
-
+<div clas
