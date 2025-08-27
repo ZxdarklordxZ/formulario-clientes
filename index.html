@@ -89,4 +89,46 @@
 </style>
 </head>
 <body>
-<div clas
+<div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Logo_BCP_Alfin.png" alt="Alfin Logo" class="logo">
+    <h1>Formulario Cliente Alfin</h1>
+    <form id="formulario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Ingrese su nombre" required>
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" placeholder="Ingrese su correo" required>
+
+        <label for="ruc">RUC:</label>
+        <input type="text" id="ruc" placeholder="Ingrese su RUC" required>
+
+        <button type="button" onclick="generarPDF()">Generar Documentos</button>
+    </form>
+</div>
+
+<!-- jsPDF para generar PDFs en el navegador -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+function generarPDF() {
+    const { jsPDF } = window.jspdf;
+
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const ruc = document.getElementById('ruc').value;
+
+    for (let i = 1; i <= 5; i++) {
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text(`Documento ${i}`, 20, 20);
+        doc.setFontSize(12);
+        doc.text(`Nombre: ${nombre}`, 20, 40);
+        doc.text(`Correo: ${correo}`, 20, 50);
+        doc.text(`RUC: ${ruc}`, 20, 60);
+        doc.save(`Documento${i}.pdf`);
+    }
+
+    alert("Se han generado los 5 documentos. Revisa tus descargas.");
+}
+</script>
+</body>
+</html>
