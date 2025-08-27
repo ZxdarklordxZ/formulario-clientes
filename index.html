@@ -45,6 +45,7 @@ input {
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
+    box-sizing: border-box;
 }
 button {
     width: 100%;
@@ -55,9 +56,21 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 button:hover {
     background-color: #e03e14;
+}
+@media(max-width: 500px){
+    .container {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    button {
+        font-size: 16px;
+    }
 }
 </style>
 </head>
@@ -65,44 +78,49 @@ button:hover {
 <div class="container">
     <img src="https://cdn.brandfetch.io/idQFTGPNtB/theme/dark/logo.svg?c=1bxid64Mup7aczewSAYMX&t=1752446110924" alt="Alfin Logo" class="logo">
     <h1>Formulario Cliente Alfin</h1>
-    <form id="formulario">
-        <form action="https://formspree.io/f/xjkevdoz" method="POST">
+    
+    <!-- Formulario integrado con Formspree -->
+    <form id="formulario" action="https://formspree.io/f/tu_endpoint" method="POST">
         <label for="razon">Razón Social:</label>
-        <input type="text" id="razon" placeholder="Ingrese la razón social" required>
+        <input type="text" name="razon" placeholder="Ingrese la razón social" required>
 
         <label for="ruc">RUC:</label>
-        <input type="text" id="ruc" placeholder="Ingrese el RUC" required>
+        <input type="text" name="ruc" placeholder="Ingrese el RUC" required>
 
         <label for="domicilio">Domicilio:</label>
-        <input type="text" id="domicilio" placeholder="Ingrese el domicilio" required>
+        <input type="text" name="domicilio" placeholder="Ingrese el domicilio" required>
 
         <label for="correo">Correo:</label>
-        <input type="email" id="correo" placeholder="Ingrese el correo" required>
+        <input type="email" name="correo" placeholder="Ingrese el correo" required>
 
-        <button type="button" onclick="enviarDatos()">Enviar</button>
+        <button type="submit">Enviar</button>
     </form>
 </div>
 
 <script>
-function enviarDatos() {
-    const razon = document.getElementById('razon').value;
-    const ruc = document.getElementById('ruc').value;
-    const domicilio = document.getElementById('domicilio').value;
-    const correo = document.getElementById('correo').value;
+const form = document.getElementById("formulario");
 
-    // Crear CSV
-    const csvContent = `data:text/csv;charset=utf-8,Razón Social,RUC,Domicilio,Correo\n${razon},${ruc},${domicilio},${correo}`;
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `registro_cliente.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+form.addEventListener("submit", function(e) {
+    e.preventDefault(); // Evita recarga de página
+    const data = new FormData(form);
 
-    alert("¡Registro completado! Se ha descargado un CSV con tus datos.");
-}
+    fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("¡Formulario enviado correctamente!");
+            form.reset();
+        } else {
+            alert("Error al enviar. Intenta nuevamente.");
+        }
+    })
+    .catch(error => {
+        alert("Error al enviar: " + error);
+    });
+});
 </script>
 </body>
 </html>
-
