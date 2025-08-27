@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Cliente</title>
+<meta charset="UTF-8">
+<title>Formulario Cliente</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <h1>Formulario de Cliente</h1>
-    <form action="https://formspree.io/f/tu-codigo" method="POST">
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required><br><br>
+<h1>Formulario Cliente</h1>
+<form id="formulario">
+    <label>Nombre:</label>
+    <input type="text" id="nombre"><br><br>
+    <label>Correo:</label>
+    <input type="email" id="correo"><br><br>
+    <label>RUC:</label>
+    <input type="text" id="ruc"><br><br>
+    <button type="button" onclick="generarPDF()">Generar Documentos</button>
+</form>
 
-        <label>Correo:</label>
-        <input type="email" name="correo" required><br><br>
+<script>
+function generarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-        <label>RUC:</label>
-        <input type="text" name="ruc" required><br><br>
+    const nombre = document.getElementById('nombre').value;
+    const correo = document.getElementById('correo').value;
+    const ruc = document.getElementById('ruc').value;
 
-        <button type="submit">Enviar</button>
-    </form>
+    doc.text(`Documento 1\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
+    doc.save('Documento1.pdf');
+
+    doc.text(`Documento 2\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
+    doc.save('Documento2.pdf');
+
+    doc.text(`Documento 3\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
+    doc.save('Documento3.pdf');
+    
+    doc.text(`Documento 4\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
+    doc.save('Documento4.pdf');
+
+    doc.text(`Documento 5\nNombre: ${nombre}\nCorreo: ${correo}\nRUC: ${ruc}`, 10, 10);
+    doc.save('Documento5.pdf');
+}
+</script>
 </body>
 </html>
+
+
